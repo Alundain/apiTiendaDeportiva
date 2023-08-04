@@ -5,9 +5,10 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const shoeRouter = require("./router/shoeRouter");
 const clothesRouter = require("./router/clothesRouter");
-const accessoryRouter = require('./router/accessoryRouter');
+const accessoryRouter = require("./router/accessoryRouter");
+const userRouter = require("./router/userRouter");
+const authRouter = require("./router/authRouter");
 const { PORT } = require("./config");
-
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 connectDB();
@@ -20,7 +21,9 @@ app.use(express.json());
 //acá las rutas
 app.use("/api", shoeRouter);
 app.use("/api", clothesRouter);
-app.use('/api', accessoryRouter)
+app.use("/api", accessoryRouter);
+app.use("/api", userRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => {
   console.log("Server listening on port 3000");
